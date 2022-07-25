@@ -10,21 +10,31 @@ header:
 
 # Player Gloves Explorer
 <div id="container">
-    <form>
+    <form style="background-color: #e9dcbe">
         <div class="form-group row">
             <label for="gloveId" class="col-sm-2 col-form-label">Glove ID</label>
             <div class="col-sm-10">
-                <input id="gloveId" class="form-control" type="text">
+                <input id="gloveId" class="form-control" type="text" />
             </div>
         </div>
-
         <button type="button" class="btn btn--primary" id="search">See Player Glove</button>
         <button type="button" class="btn btn--primary" id="randomize">Random</button>
     </form>
-
-        <a id="marketplacelink">
-            <img id="nftImage" class="nftImage">
-        </a>
+    <a id="marketplacelink">
+        <img id="nftImage" class="nftImage">
+        <p id="marketplaceurl"></p>
+    </a>
+    <h2>Traits of this Glove</h2>
+    <table id="glove_traits">
+      <thead>
+        <tr>
+          <th scope="col">Trait Name</th>
+          <th scope="col">Trait Value</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
 </div>
 
 <script src="script.js"></script>

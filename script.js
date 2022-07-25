@@ -1,3 +1,4 @@
+const trait_count = 3;
 
 async function run() {
     const data = await fetch('data.csv').then(function (response) {
@@ -13,6 +14,24 @@ async function run() {
         document.getElementById('gloveId').value = glove[0];
         document.getElementById('nftImage').src = glove[1];
         document.getElementById('marketplacelink').href = glove[2];
+        document.getElementById('marketplaceurl').text = glove[2];
+        const trait_table = document.getElementById('glove_traits');
+        const new_body = document.createElement("tbody");
+        for (let i = 0; i < trait_count; i++) {
+            let th = document.createElement('th');
+            th.setAttribute('scope', 'row');
+            th.textContent=`Trait ${i + 1}`;
+
+            let td = document.createElement('td');
+            td.textContent = glove[3+i]
+
+            let tr = document.createElement('tr');
+            tr.appendChild(th);
+            tr.appendChild(td);
+            new_body.appendChild(tr);
+        }
+        trait_table.replaceChild(new_body, trait_table.tBodies[0])
+
     }
 
     function randomize() {
