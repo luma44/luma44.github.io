@@ -28,7 +28,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div id="container">
+  <div class="container nftSearcher">
     <form style="background-color: #e9dcbe" @submit.prevent>
       <div class="form-group row">
         <label for="gloveId" class="col-sm-2 col-form-label">ID</label>

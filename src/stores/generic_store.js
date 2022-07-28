@@ -20,6 +20,9 @@ export const createStore = (storeType, database) => {
                 excludeId = excludeId || '';
                 const all_else = Object.entries(this.db).filter((id, value) => id !== excludeId)
                 return all_else[Math.floor(Math.random() * all_else.length)][1];
+            },
+            all() {
+                return Object.entries(this.db);
             }
         },
     })

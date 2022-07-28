@@ -9,4 +9,5 @@ const store = animalArcadeStore();
 <template>
   <HeroImage image="assets/player_gloves_hero.webp"></HeroImage>
   <NftSearcher :store=store></NftSearcher>
+  <NftList :store=store></NftList>
 </template>
