@@ -29,22 +29,20 @@ onMounted(async () => {
 
 <template>
   <div class="container nftSearcher">
-    <form style="background-color: #e9dcbe" @submit.prevent>
-      <div class="form-group row">
-        <label for="gloveId" class="col-sm-2 col-form-label">ID</label>
-        <div class="col-sm-10">
-          <input :value="nftName" @input="event => nft = store.findById(event.target.value)">
-        </div>
+    <div class="row">
+
+      <h1 class="col-3">
+        <label for="nftId" class="col-form-label">ID</label>
+        <input id="nftId" class="col-sm-5" :value="nftName" @input="event => nft = store.findById(event.target.value)">
+      </h1>
+      <div class="col-3 mt-3">
+      <button type="button" class="btn btn-primary" @click="randomize">Random</button>
       </div>
-      <button type="button" class="btn btn--primary" @click="randomize">Random</button>
-    </form>
+    </div>
 
     <NftDetails :nft="nft"></NftDetails>
   </div>
 </template>
 
 <style scoped>
-img {
-  width: 50%;
-}
 </style>
