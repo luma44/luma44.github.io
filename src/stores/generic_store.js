@@ -22,7 +22,7 @@ export const createStore = (storeType, database) => {
                 return all_else[Math.floor(Math.random() * all_else.length)][1];
             },
             all() {
-                return Object.entries(this.db);
+                return Object.entries(this.db).map(e => e[1]);
             }
         },
     })

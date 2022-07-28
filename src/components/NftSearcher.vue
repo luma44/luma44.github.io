@@ -40,7 +40,7 @@ onMounted(async () => {
       </div>
     </div>
 
-    <NftDetails :nft="nft"></NftDetails>
+    <NftDetails :nft=nft></NftDetails>
   </div>
 </template>
 
