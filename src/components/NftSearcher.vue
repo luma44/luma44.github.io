@@ -22,9 +22,8 @@ function randomize() {
   nft.value = props.store.random(nftName);
 }
 
-onMounted(async () => {
-  randomize();
-})
+randomize();
+
 </script>
 
 <template>

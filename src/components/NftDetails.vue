@@ -1,8 +1,24 @@
 <script setup>
-defineProps({
+import {ref, onBeforeMount, computed, onMounted} from 'vue';
+
+
+const props = defineProps({
   nft: {
     type: Object,
     required: true
+  },
+  thumbnail: {
+    type: Boolean,
+    required: false,
+    default: true
+  }
+})
+
+const imageUrl = computed(() => {
+  if (props.thumbnail) {
+    return props.nft.thumbnail;
+  } else {
+    return props.nft.image;
   }
 })
 
@@ -11,13 +27,13 @@ defineProps({
 <template>
   <div class="container" v-if="nft">
     <div class="row">
-      <div class="col">
-        <a id="marketplacelink" v-bind:href="nft.external_url">
-          <img class="img-fluid rounded float-left mx-auto d-block" v-bind:src="nft.thumbnail">
+      <div class="col-8">
+        <a id="marketplacelink" :href="nft.external_url">
+          <img class="img-fluid rounded float-left mx-auto d-block" :src="imageUrl" :class="{thumbnail: thumbnail}">
           <p id="marketplaceurl">Find on Gamestop's Marketplace</p>
         </a>
       </div>
-      <div class="col">
+      <div class="col-3">
         <table class="table table-hover">
           <thead>
           <tr class="table-dark">
@@ -35,11 +51,10 @@ defineProps({
       </div>
     </div>
   </div>
-
 </template>
 
 <style scoped>
-img {
+.thumbnail {
   max-height: 400px;
 }
 </style>
