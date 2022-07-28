@@ -4,7 +4,6 @@ import NftSearcher from "../components/NftSearcher.vue";
 
 import {animalArcadeStore} from "@/stores/animal_arcade_store";
 const store = animalArcadeStore();
-await store.fetchData();
 </script>
 
 <template>

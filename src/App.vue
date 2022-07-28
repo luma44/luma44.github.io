@@ -7,9 +7,7 @@ import NftSearcher from "./components/NftSearcher.vue";
 
 <template>
   <Navigation></Navigation>
-  <Suspense>
-    <RouterView/>
-  </Suspense>
+  <RouterView/>
 </template>
 
 <style scoped>
