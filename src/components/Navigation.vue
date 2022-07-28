@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: rgba(0,0,0,0.5);">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background: rgba(0,0,0,0.5);">
     <div class="container">
       <RouterLink class="navbar-brand" to="/">Luma44</RouterLink>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

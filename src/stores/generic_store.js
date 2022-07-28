@@ -23,6 +23,37 @@ export const createStore = (storeType, database) => {
             },
             all() {
                 return Object.entries(this.db).map(e => e[1]);
+            },
+            filtered(filters) {
+                let nfts = this.all();
+                if (filters.length !== 0) {
+                    nfts = this.all()
+                        .filter(nft => {
+                            for (let i = 0; i < filters.length; i++) {
+                                const f = filters[i];
+                                for (let j = 0; j < nft.attributes.length; j++) {
+                                    const att = nft.attributes[j];
+                                    if (att.trait_type === f.trait_type && att.value === f.value) {
+                                        return true
+                                    }
+                                }
+                            }
+                            return false;
+                        });
+                }
+                return nfts;
+            },
+            traitTypes() {
+                return Object.entries(this.db)
+                    .map(e => e[1])[0].attributes.map(att => att.trait_type)
+            },
+            traitValues(trait_type) {
+                let values = Object.entries(this.db)
+                    .map(e => e[1].attributes
+                        .filter(att => att.trait_type === trait_type)
+                        .map(att => att.value)[0]
+                    )
+                return new Set(values);
             }
         },
     })
