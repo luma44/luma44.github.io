@@ -50,10 +50,11 @@ function setFilter(trait_type, trait_value) {
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
       <div class="col" v-for="nft in store.filtered(filters)" :key="nft.name">
         <div class="card" data-bs-toggle="modal" :data-bs-target="'#nftModal'+nft.name">
-          <img v-bind:src="nft.thumbnail" class="card-img-top" alt="...">
+          <img v-bind:src="nft.thumbnail" class="card-img-top" alt="Image of the NFT">
           <div class="card-body">
             <h5 class="card-title">{{ nft.description }}</h5>
-            <a v-bind:href="nft.external_url" class="card-link">Marketplace link</a>
+            <a v-bind:href="nft.external_url" v-if="nft.external_url" class="card-link">Marketplace link</a>
+            <span v-else class="card-link">Not available on Marketplace</span>
           </div>
           <div class="modal fade" :id="'nftModal'+nft.name" tabindex="-1" aria-labelledby="exampleModalLabel"
                aria-hidden="true">

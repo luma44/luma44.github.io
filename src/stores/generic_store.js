@@ -3,8 +3,12 @@ import {defineStore} from 'pinia'
 export const createStore = (storeType, database) => {
     const store = {};
     database.forEach(function (value) {
-        value.image = new URL(`../assets/${storeType}/${value.name}.png`, import.meta.url).href
-        value.thumbnail = new URL(`../assets/${storeType}/Thumbnails/${value.name}.png`, import.meta.url).href
+        let imgName = value.name;
+        if (!value.external_url || value.external_url.length === 0) {
+            imgName = "null";
+        }
+        value.image = new URL(`../assets/${storeType}/${imgName}.png`, import.meta.url).href;
+        value.thumbnail = new URL(`../assets/${storeType}/Thumbnails/${imgName}.png`, import.meta.url).href;
         store[value.name] = value;
     })
 

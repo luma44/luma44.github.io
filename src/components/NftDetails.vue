@@ -28,10 +28,14 @@ const imageUrl = computed(() => {
   <div class="container" v-if="nft">
     <div class="row row-cols-1 g-4" :class="{'row-cols-md-2': thumbnail}">
       <div class="col">
-        <a id="marketplacelink" :href="nft.external_url">
-          <img class="img-fluid rounded float-left mx-auto d-block" :src="imageUrl" :class="{thumbnail: thumbnail}">
-          <p id="marketplaceurl">Find on Gamestop's Marketplace</p>
+        <a :href="nft.external_url" v-if="nft.external_url">
+          <img class="img-fluid rounded float-left mx-auto" :src="imageUrl" :class="{thumbnail: thumbnail}">
+          <p>Find on Gamestop's Marketplace</p>
         </a>
+        <span v-else>
+          <img class="img-fluid rounded float-left mx-auto" :src="imageUrl" :class="{thumbnail: thumbnail}">
+          <p>Not available on Marketplace</p>
+        </span>
       </div>
       <div class="col">
         <div class="table-responsive">
