@@ -26,8 +26,8 @@ function setFilter(trait_type, trait_value) {
 <template>
   <div class="container nftSearcher">
     <div>
-      <div class="btn-group">
-        <div class="col" v-for="trait_type in store.traitTypes()">
+      <div>
+        <span class="dropdown" v-for="trait_type in store.traitTypes()">
           <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
             <span v-if="filters.has(trait_type)">{{ filters.get(trait_type) }}</span>
@@ -43,7 +43,7 @@ function setFilter(trait_type, trait_value) {
               {{ trait_value }}
             </li>
           </ul>
-        </div>
+        </span>
       </div>
     </div>
 

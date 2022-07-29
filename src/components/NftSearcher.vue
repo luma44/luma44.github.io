@@ -28,14 +28,14 @@ randomize();
 
 <template>
   <div class="container nftSearcher">
-    <div class="row">
-
-      <h1 class="col-3">
+    <div class="row  row-cols-1 row-cols-sm-2 row-cols-md-10">
+      <h1 class="col col-md-3">
         <label for="nftId" class="col-form-label">ID</label>
-        <input id="nftId" class="col-sm-5" :value="nftName" @input="event => nft = store.findById(event.target.value)">
+        <input id="nftId" class="col-6" :value="nftName"
+               @input="event => nft = store.findById(event.target.value)">
       </h1>
-      <div class="col-3 mt-3">
-      <button type="button" class="btn btn-primary" @click="randomize">Random</button>
+      <div class="col mb-3 mt-sm-3">
+        <button type="button" class="btn btn-primary" @click="randomize">Random</button>
       </div>
     </div>
 
