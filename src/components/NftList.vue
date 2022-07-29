@@ -10,16 +10,16 @@ const props = defineProps({
   }
 })
 
-const filters = ref([])
+const filters = ref(new Map())
 
-function addFilter(trait_type, trait_value) {
-  filters.value.push({trait_type: trait_type, value: trait_value});
+function setFilter(trait_type, trait_value) {
+  if (trait_value) {
+    filters.value.set(trait_type, trait_value);
+  } else {
+    filters.value.delete(trait_type);
+  }
+  console.log(filters.value)
 }
-
-function removeFilter(filter) {
-  filters.value = filters.value.filter(f => f !== filter)
-}
-
 
 </script>
 
@@ -30,23 +30,21 @@ function removeFilter(filter) {
         <div class="col" v-for="trait_type in store.traitTypes()">
           <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
-            {{ trait_type }}
+            <span v-if="filters.has(trait_type)">{{ filters.get(trait_type) }}</span>
+            <span v-else>{{ trait_type }}</span>
           </button>
           <ul class="dropdown-menu">
-            <li class="dropdown-item" @click="addFilter(trait_type, trait_value)"
-                v-for="trait_value in store.traitValues(trait_type)">
+            <li class="dropdown-item" @click="setFilter(trait_type, undefined)" v-if="filters.has(trait_type)">
+              Clear filter
+            </li>
+            <li v-if="filters.has(trait_type)"><hr class="dropdown-divider"></li>
+            <li class="dropdown-item" @click="setFilter(trait_type, trait_value)" :class="{active: filters.get(trait_type) === trait_value}"
+                v-for="trait_value in store.traitValues(trait_type)" >
               {{ trait_value }}
             </li>
           </ul>
         </div>
       </div>
-    </div>
-
-    <div>
-      <span class="badge rounded-pill text-bg-success" v-for="filter in filters" >
-        {{filter.trait_type}}: {{filter.value}}
-        <button type="button" class="btn-close" aria-label="Close" @click="removeFilter(filter)"></button>
-      </span>
     </div>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">

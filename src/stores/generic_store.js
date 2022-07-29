@@ -25,23 +25,20 @@ export const createStore = (storeType, database) => {
                 return Object.entries(this.db).map(e => e[1]);
             },
             filtered(filters) {
-                let nfts = this.all();
-                if (filters.length !== 0) {
-                    nfts = this.all()
+                if (filters.size !== 0) {
+                    return this.all()
                         .filter(nft => {
-                            for (let i = 0; i < filters.length; i++) {
-                                const f = filters[i];
-                                for (let j = 0; j < nft.attributes.length; j++) {
-                                    const att = nft.attributes[j];
-                                    if (att.trait_type === f.trait_type && att.value === f.value) {
-                                        return true
-                                    }
+                            let allMatches = nft.attributes.map(att => {
+                                if (filters.has(att.trait_type)) {
+                                    return att.value === filters.get(att.trait_type);
                                 }
-                            }
-                            return false;
+                                return true;
+                            });
+                            return allMatches.every(element => element)
                         });
+                } else {
+                    return this.all();
                 }
-                return nfts;
             },
             traitTypes() {
                 return Object.entries(this.db)
