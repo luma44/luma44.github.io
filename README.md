@@ -1,19 +1,20 @@
-# dev
+# Luma44's NFT Collections
 
-This template should help get you started developing with Vue 3 in Vite.
+Static page built with vue.js, vite and bootstrap
 
-## Recommended IDE Setup
+`raw_animal_arcade` and `raw_player_glove` are magic directories: json-files in there are added to the "database" 
+of the corresponding NFT collection. Using the github website, you can drop your NFT description files with the 
+corresponding image and they will be automatically used for the page.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Images you're dropping will be used for their NFT and thumbnails are automatically generated.
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Since unpublished NFTs (i.e. without an `external_url` entry in the JSON file) aren't displayed anyway, their images
+aren't used and don't need to be added. 
 
 ## Project Setup
 
 ```sh
-npm install
+npm ci
 ```
 
 ### Compile and Hot-Reload for Development
