@@ -23,8 +23,8 @@ var im = require('imagemagick');
         const outputFile = path.join(outputDir, `${imageName}.png`);
         const outputThumbnail = path.join(outputDir, `${imageName}_t.png`);
 
-        const image_stat = await fs.promises.stat(inputFile);
-        if (image_stat.isFile()) {
+        if (fs.existsSync(inputFile)) {
+            console.log(`handling ${inputFile}`)
             await fs.promises.copyFile(inputFile, outputFile);
             await thumbnail(inputFile, outputThumbnail);
         }
@@ -51,12 +51,12 @@ var im = require('imagemagick');
             await handleImage(inputDir, outputDir, nft['name']);
         }
         await handleImage(inputDir, outputDir, 'null');
-
     }
 
     await read_input_type("player_glove");
     await read_input_type("animal_arcade");
 
+    console.log()
     await fs.promises.rm(targetDir, {force: true, recursive: true});
     await fs.promises.rename(generated, targetDir)
 })();
