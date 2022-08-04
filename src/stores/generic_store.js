@@ -7,8 +7,8 @@ export const createStore = (storeType, database) => {
         if (!value.external_url || value.external_url.length === 0) {
             imgName = "null";
         }
-        value.image = new URL(`../assets/${storeType}/${imgName}.png`, import.meta.url).href;
-        value.thumbnail = new URL(`../assets/${storeType}/Thumbnails/${imgName}.png`, import.meta.url).href;
+        value.image = new URL(`../generated/${storeType}/${imgName}.png`, import.meta.url).href;
+        value.thumbnail = new URL(`../generated/${storeType}/${imgName}_t.png`, import.meta.url).href;
         store[value.name] = value;
     })
 
