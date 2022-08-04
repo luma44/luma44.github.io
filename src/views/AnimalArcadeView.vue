@@ -5,7 +5,7 @@ import NftList from "../components/NftList.vue";
 
 import {animalArcadeStore} from "@/stores/animal_arcade_store";
 const store = animalArcadeStore();
-const imageUrl = new URL("../assets/animal_arcade_hero.webp", import.meta.url).href
+const imageUrl = new URL("../assets/animal_arcade/hero.png", import.meta.url).href
 </script>
 
 <template>
