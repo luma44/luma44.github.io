@@ -24,28 +24,44 @@ function setFilter(trait_type, trait_value) {
 </script>
 
 <template>
-  <div class="container nftSearcher">
-    <div>
-      <div>
-        <span class="dropdown" v-for="trait_type in store.traitTypes()">
-          <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-            <span v-if="filters.has(trait_type)">{{ filters.get(trait_type) }}</span>
-            <span v-else>{{ trait_type }}</span>
-          </button>
-          <ul class="dropdown-menu">
-            <li class="dropdown-item" @click="setFilter(trait_type, undefined)" v-if="filters.has(trait_type)">
-              Clear filter
-            </li>
-            <li v-if="filters.has(trait_type)"><hr class="dropdown-divider"></li>
-            <li class="dropdown-item" @click="setFilter(trait_type, trait_value)" :class="{active: filters.get(trait_type) === trait_value}"
-                v-for="trait_value in store.traitValues(trait_type)" >
-              {{ trait_value }}
+  <div class="container">
+    <nav class="navbar bg-light navbar-expand-lg">
+      <div class="container-fluid">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#filters"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle filters">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="filters">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 row">
+            <li class="nav-item dropdown col" v-for="trait_type in store.traitTypes()">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                 aria-expanded="false">
+                <span v-if="filters.has(trait_type)">{{ filters.get(trait_type) }}</span>
+                <span v-else>{{ trait_type }}</span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-item" @click="setFilter(trait_type, undefined)" v-if="filters.has(trait_type)">
+                  Clear filter
+                </li>
+                <li v-if="filters.has(trait_type)">
+                  <hr class="dropdown-divider">
+                </li>
+
+                <li class="dropdown-item" @click="setFilter(trait_type, trait_value)"
+                    :class="{active: filters.get(trait_type) === trait_value}"
+                    v-for="trait_value in store.traitValues(trait_type)">
+                  {{ trait_value }}
+                </li>
+              </ul>
             </li>
           </ul>
-        </span>
+        </div>
       </div>
-    </div>
+
+
+    </nav>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
       <div class="col" v-for="nft in store.filtered(filters)" :key="nft.name">
@@ -77,5 +93,4 @@ function setFilter(trait_type, trait_value) {
 </template>
 
 <style scoped>
-
 </style>
