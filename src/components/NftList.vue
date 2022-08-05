@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from 'vue';
+import {ref, computed} from 'vue';
 
 import NftDetails from "./NftDetails.vue";
 
@@ -10,16 +10,20 @@ const props = defineProps({
   }
 })
 
-const filters = ref(new Map())
+const filters = computed(() => {
+  return props.store.getFilters();
+})
 
-function setFilter(trait_type, trait_value) {
-  if (trait_value) {
-    filters.value.set(trait_type, trait_value);
-  } else {
-    filters.value.delete(trait_type);
-  }
-  console.log(filters.value)
-}
+// const filters = ref(new Map())
+//
+// function setFilter(trait_type, trait_value) {
+//   if (trait_value) {
+//     filters.value.set(trait_type, trait_value);
+//   } else {
+//     filters.value.delete(trait_type);
+//   }
+//   console.log(filters.value)
+// }
 
 </script>
 
@@ -42,14 +46,14 @@ function setFilter(trait_type, trait_value) {
                 <span v-else>{{ trait_type }}</span>
               </a>
               <ul class="dropdown-menu">
-                <li class="dropdown-item" @click="setFilter(trait_type, undefined)" v-if="filters.has(trait_type)">
+                <li class="dropdown-item" @click="store.setFilter(trait_type, undefined)" v-if="filters.has(trait_type)">
                   Clear filter
                 </li>
                 <li v-if="filters.has(trait_type)">
                   <hr class="dropdown-divider">
                 </li>
 
-                <li class="dropdown-item" @click="setFilter(trait_type, trait_value)"
+                <li class="dropdown-item" @click="store.setFilter(trait_type, trait_value)"
                     :class="{active: filters.get(trait_type) === trait_value}"
                     v-for="trait_value in store.traitValues(trait_type)">
                   {{ trait_value }}
@@ -81,7 +85,7 @@ function setFilter(trait_type, trait_value) {
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <NftDetails :nft="nft" :thumbnail=false></NftDetails>
+                  <NftDetails :nft="nft" :thumbnail=false :store="store"></NftDetails>
                 </div>
               </div>
             </div>

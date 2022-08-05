@@ -39,7 +39,7 @@ randomize();
       </div>
     </div>
 
-    <NftDetails :nft=nft></NftDetails>
+    <NftDetails :nft=nft :store="store"></NftDetails>
   </div>
 </template>
 

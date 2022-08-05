@@ -15,6 +15,7 @@ export const createStore = (storeType, database) => {
     return defineStore(storeType, {
         state: () => ({
             db: store,
+            filters: new Map()
         }),
         actions: {
             findById(id) {
@@ -55,6 +56,16 @@ export const createStore = (storeType, database) => {
                         .map(att => att.value)[0]
                     )
                 return new Set(values);
+            },
+            getFilters() {
+                return this.filters;
+            },
+            setFilter(trait_type, trait_value) {
+                if (trait_value) {
+                    this.filters.set(trait_type, trait_value);
+                } else {
+                    this.filters.delete(trait_type);
+                }
             }
         },
     })

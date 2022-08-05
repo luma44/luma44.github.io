@@ -7,6 +7,10 @@ const props = defineProps({
     type: Object,
     required: true
   },
+  store: {
+    type: Object,
+    required: true
+  },
   thumbnail: {
     type: Boolean,
     required: false,
@@ -47,7 +51,7 @@ const imageUrl = computed(() => {
             </tr>
             </thead>
             <tbody>
-            <tr v-for="trait in nft.attributes">
+            <tr v-for="trait in nft.attributes" @click="store.setFilter(trait.trait_type, trait.value)">
               <th scope="row">{{ trait.trait_type }}</th>
               <td>{{ trait.value }}</td>
             </tr>
