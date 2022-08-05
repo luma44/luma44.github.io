@@ -1,30 +1,12 @@
 <script setup>
-import {ref, computed} from 'vue';
-
 import NftDetails from "./NftDetails.vue";
 
-const props = defineProps({
+defineProps({
   store: {
     type: Object,
     required: true
   }
 })
-
-const filters = computed(() => {
-  return props.store.getFilters();
-})
-
-// const filters = ref(new Map())
-//
-// function setFilter(trait_type, trait_value) {
-//   if (trait_value) {
-//     filters.value.set(trait_type, trait_value);
-//   } else {
-//     filters.value.delete(trait_type);
-//   }
-//   console.log(filters.value)
-// }
-
 </script>
 
 <template>
@@ -39,22 +21,23 @@ const filters = computed(() => {
 
         <div class="collapse navbar-collapse" id="filters">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 row">
-            <li class="nav-item dropdown col" v-for="trait_type in store.traitTypes()">
+            <li class="nav-item dropdown col" v-for="trait_type in store.traitTypes()"
+                :class="{'bg-danger':store.hasFilter(trait_type)}">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                  aria-expanded="false">
-                <span v-if="filters.has(trait_type)">{{ filters.get(trait_type) }}</span>
+                <span v-if="store.hasFilter(trait_type)">{{ store.getFilter(trait_type) }}</span>
                 <span v-else>{{ trait_type }}</span>
               </a>
               <ul class="dropdown-menu">
-                <li class="dropdown-item" @click="store.setFilter(trait_type, undefined)" v-if="filters.has(trait_type)">
+                <li class="dropdown-item" @click="store.setFilter(trait_type, undefined)" v-if="store.hasFilter(trait_type)">
                   Clear filter
                 </li>
-                <li v-if="filters.has(trait_type)">
+                <li v-if="store.hasFilter(trait_type)">
                   <hr class="dropdown-divider">
                 </li>
 
                 <li class="dropdown-item" @click="store.setFilter(trait_type, trait_value)"
-                    :class="{active: filters.get(trait_type) === trait_value}"
+                    :class="{active: store.getFilter(trait_type) === trait_value}"
                     v-for="trait_value in store.traitValues(trait_type)">
                   {{ trait_value }}
                 </li>
@@ -68,7 +51,7 @@ const filters = computed(() => {
     </nav>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-      <div class="col" v-for="nft in store.filtered(filters)" :key="nft.name">
+      <div class="col" v-for="nft in store.filtered()" :key="nft.name">
         <div class="card" data-bs-toggle="modal" :data-bs-target="'#nftModal'+nft.name">
           <img v-bind:src="nft.thumbnail" class="card-img-top" alt="Image of the NFT">
           <div class="card-body">

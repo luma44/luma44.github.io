@@ -29,13 +29,13 @@ export const createStore = (storeType, database) => {
             all() {
                 return Object.entries(this.db).map(e => e[1]);
             },
-            filtered(filters) {
-                if (filters.size !== 0) {
+            filtered() {
+                if (this.filters.size !== 0) {
                     return this.all()
                         .filter(nft => {
                             let allMatches = nft.attributes.map(att => {
-                                if (filters.has(att.trait_type)) {
-                                    return att.value === filters.get(att.trait_type);
+                                if (this.filters.has(att.trait_type)) {
+                                    return att.value === this.filters.get(att.trait_type);
                                 }
                                 return true;
                             });
@@ -57,16 +57,21 @@ export const createStore = (storeType, database) => {
                     )
                 return new Set(values);
             },
-            getFilters() {
-                return this.filters;
-            },
+
+
             setFilter(trait_type, trait_value) {
                 if (trait_value) {
                     this.filters.set(trait_type, trait_value);
                 } else {
                     this.filters.delete(trait_type);
                 }
-            }
+            },
+            hasFilter(trait_type) {
+                return this.filters.has(trait_type);
+            },
+            getFilter(trait_type) {
+                return this.filters.get(trait_type);
+            },
         },
     })
 }
